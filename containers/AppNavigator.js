@@ -1,16 +1,21 @@
-import { createStackNavigator, createBottomTabNavigator } from "react-navigation";
+import { 
+  createStackNavigator, 
+  createBottomTabNavigator 
+} from "react-navigation";
 import {
   createReduxBoundAddListener,
   createReactNavigationReduxMiddleware
 } from "react-navigation-redux-helpers";
 import { connect } from "react-redux";
 import React from "react";
+import { Ionicons, MaterialIcons } from "@expo/vector-icons"
 
 import ProductDetail from "./ProductDetail";
 import AddProduct from "./AddProduct";
 import StoreMap from "./StoreMap";
-import { Ionicons, MaterialIcons } from "@expo/vector-icons"
 import ProductListWithFlatList from "./ProductListWithFlatList";
+import SearchListView from "./SearchListView";
+import AdminProductListView from "./AdminProductListView";
 
 const ListStack = createStackNavigator(
   {
@@ -26,7 +31,7 @@ const ListStack = createStackNavigator(
     navigationOptions: {
       title: "Product Manager",
       headerStyle: {
-        backgroundColor: "#00ff80"
+        backgroundColor: "orange"
       },
       headerTintColor: "#fff",
       headerTitleStyle: {
@@ -48,7 +53,51 @@ const AddStack = createStackNavigator(
     navigationOptions: {
       title: "Manage",
       headerStyle: {
-        backgroundColor: "#00ff80"
+        backgroundColor: "orange"
+      },
+      headerTintColor: "#fff",
+      headerTitleStyle: {
+        fontWeight: "bold",
+        textAlign: "center"
+      }
+    }
+  }
+);
+
+const SearchProductListStack = createStackNavigator(
+  {
+    SearchListView: {
+      screen: SearchListView
+    }
+  },
+  {
+    initialRouteName: "SearchListView",
+    navigationOptions: {
+      title: "Search Products",
+      headerStyle: {
+        backgroundColor: "orange"
+      },
+      headerTintColor: "#fff",
+      headerTitleStyle: {
+        fontWeight: "bold",
+        textAlign: "center"
+      }
+    }
+  }
+);
+
+const AdminProductListStack = createStackNavigator(
+  {
+    AdminProductListView: {
+      screen: AdminProductListView
+    }
+  },
+  {
+    initialRouteName: "AdminProductListView",
+    navigationOptions: {
+      title: "Admin Products",
+      headerStyle: {
+        backgroundColor: "orange"
       },
       headerTintColor: "#fff",
       headerTitleStyle: {
@@ -63,6 +112,8 @@ export const AppNavigator = createBottomTabNavigator(
   {
     List: ListStack,
     Add: AddStack,
+    Search: SearchProductListStack,
+    AdminProduct: AdminProductListStack,
     Stores: StoreMap
   },
   {
@@ -74,6 +125,16 @@ export const AppNavigator = createBottomTabNavigator(
           iconName = `ios-list-box${focused ? "" : "-outline"}`;
         } else if (routeName === "Add") {
           iconName = `ios-add-circle${focused ? "" : "-outline"}`;
+        }  else if (routeName === "Search") {
+          iconName = `ios-search${focused ? "" : "-outline"}`;
+        } else if (routeName === "AdminProduct") {
+          return (
+            <Ionicons
+              name="logo-apple"
+              size={25}
+              color={tintColor}
+            />
+          );
         } else if (routeName === "Stores") {
           return (
             <MaterialIcons

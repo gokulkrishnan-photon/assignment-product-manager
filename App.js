@@ -4,21 +4,23 @@ import { Provider, connect } from "react-redux";
 import AppWithNavigationState, { middleware } from "./containers/AppNavigator";
 import rootReducer from "./reducers";
 import createSagaMiddleware from "redux-saga";
-import {productWatchers} from "./sagas/product";
+import { productWatchers } from "./sagas/product";
 
 const sagaMiddleware = createSagaMiddleware();
 
 const store = createStore(
   rootReducer,
   {
-    productState: { 
-    products: [],
-    product: {},
-    isLoading: false,
-    isRefreshing: false,
-    page: 1,
-    limit:8
- },
+    productState: {
+      products: [],
+      product: {},
+      searchProducts: [],
+      isLoading: false,
+      isRefreshing: false,
+      page: 1,
+      limit: 8,
+      dataFiltered: []
+    },
     storeState: { stores: [], isLoading: false }
   },
   applyMiddleware(middleware, sagaMiddleware)

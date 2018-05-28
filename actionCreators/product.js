@@ -7,7 +7,17 @@ import {
     GET_PRODUCT_SUCCESS,
     ADD_PRODUCT,
     ADD_PRODUCT_SUCCESS,
-    ADD_PRODUCT_FAILURE
+    ADD_PRODUCT_FAILURE,
+    DELETE_PRODUCT,
+    DELETE_PRODUCT_SUCCESS,
+    DELETE_PRODUCT_FAILURE,
+    SEARCH_FILTER_PRODUCTS,
+    GET_SEARCH_PRODUCTS,
+    GET_SEARCH_PRODUCTS_SUCCESS,
+    GET_SEARCH_PRODUCTS_FAILURE,
+    GET_PRODUCT_DETAILS,
+    GET_PRODUCT_DETAILS_SUCCESS,
+    GET_PRODUCT_DETAILS_FAILURE,
 } from "../actionTypes/product";
 
 // export const GET_PRODUCTS = 'GET_PRODUCTS'
@@ -82,6 +92,58 @@ export function addProductSuccess(product) {
 export function addProductFailure(error) {
     return {
         type: ADD_PRODUCT_FAILURE,
+        error
+    }
+}
+
+export function deleteProduct(productId) {
+    return {
+        type: DELETE_PRODUCT,
+        productId
+    }
+}
+
+export function deleteProductSuccess(productId) {
+    return {
+        type: DELETE_PRODUCT_SUCCESS,
+        productId
+    }
+}
+
+export function deleteProductFailure(error) {
+    return {
+        type: DELETE_PRODUCT_FAILURE,
+        error
+    }
+}
+
+export function searchProductFiler(text, searchData) {
+    return {
+        type: SEARCH_FILTER_PRODUCTS,
+        text,
+        searchData
+    }
+}
+
+export function searchProduct(page, limit) {
+    return {
+        type: GET_SEARCH_PRODUCTS,
+        page,
+        limit
+    }
+}
+
+export function searchProductSuccess(page, limit) {
+    return {
+        type: GET_SEARCH_PRODUCTS_SUCCESS,
+        page,
+        limit
+    }
+}
+
+export function searchProductFailure(error) {
+    return {
+        type: GET_SEARCH_PRODUCTS_FAILURE,
         error
     }
 }
